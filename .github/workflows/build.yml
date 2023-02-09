@@ -1,0 +1,31 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  run_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 8
+
+      - name: Run Test
+        run: mvn test -Dtest="org.apache.commons.collections4.map.AbstractMapTest"
+                
+  # run_test_with_nondex:
+    # runs-on: ubuntu-latest
+
+    # steps:
+    # - uses: actions/checkout@v3
+    # - uses: actions/setup-java@v3
+      # with:
+        # distribution: 'zulu'
+        # java-version: 8
+        
+    # - name: Run Test w nondex
+      # run: mvn -pl retrofit nondex:nondex -Dtest="retrofit2.CompletableFutureAndroidTest#completableFutureApi24"
+           # mvn test -Dtest='org.apache.commons.collections4.map.AbstractMapTest' -U -X
